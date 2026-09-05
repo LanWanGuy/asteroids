@@ -1,3 +1,5 @@
+import pygame, sys
+
 from asteroid import Asteroid
 from asteroidfield import AsteroidField
 from circleshape import *
@@ -6,8 +8,7 @@ from logger import log_state, log_event
 from player import Player
 from shot import Shot
 
-import pygame
-import sys
+
 
 def main():
     print(f"Starting Asteroids with pygame version: {pygame.version.ver}")
@@ -54,7 +55,7 @@ def main():
                 if asteroid.collides_with(shot):
                     log_event("asteroid_shot")
                     shot.kill()
-                    asteroid.kill()
+                    asteroid.split()
         pygame.display.flip()
         dt = clock.tick(60) / 1000
 
