@@ -1,13 +1,12 @@
 from asteroid import Asteroid
-import pygame
-from constants import *
-import player
-from circleshape import *
-from logger import log_state
-from player import Player
 from asteroidfield import AsteroidField
+from circleshape import *
+from constants import *
+from logger import log_state, log_event
+from player import Player
 from shot import Shot
-from logger import log_event
+
+import pygame
 import sys
 
 def main():
@@ -50,6 +49,12 @@ def main():
                 log_event("player_hit")
                 print("Game over!")
                 sys.exit()
+        for asteroid in asteroids:
+            for shot in shots:
+                if asteroid.collides_with(shot):
+                    log_event("asteroid_shot")
+                    shot.kill()
+                    asteroid.kill()
         pygame.display.flip()
         dt = clock.tick(60) / 1000
 
