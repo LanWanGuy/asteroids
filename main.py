@@ -1,8 +1,11 @@
+from asteroid import Asteroid
 import pygame
 from constants import *
 import player
 from circleshape import *
 from logger import log_state
+from player import Player
+from asteroidfield import AsteroidField
 
 def main():
     print(f"Starting Asteroids with pygame version: {pygame.version.ver}")
@@ -11,8 +14,16 @@ def main():
 
     updatable = pygame.sprite.Group()
     drawable = pygame.sprite.Group()
-    player.Player.containers = (updatable, drawable)
-    player1 = player.Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
+    asteroids = pygame.sprite.Group()
+    asteroidfield = pygame.sprite.Group()
+
+    Player.containers = (updatable, drawable)
+    Asteroid.containers = (asteroids, updatable, drawable)
+    AsteroidField.containers = (updatable)
+
+    player1 = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
+    asteroidfield1 = AsteroidField()
+
 
     pygame.init()
     clock = pygame.time.Clock()
